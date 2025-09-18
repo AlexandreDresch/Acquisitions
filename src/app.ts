@@ -1,9 +1,7 @@
-import express from "express";
+import express from 'express'
 
-const app = express();
+const app = express()
 
-app
-  .use(express.json({ limit: "50mb" }))
-  .use("/health", (_req, res) => res.status(200).send("OK"));
+app.use(express.json({ limit: '50mb' })).use('/health', (_req, res) => res.status(200).send('OK'))
 
-export default app;
+export default app
