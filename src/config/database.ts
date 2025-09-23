@@ -1,4 +1,4 @@
-import config from './config'
+import config from './config.js'
 import { neon } from '@neondatabase/serverless'
 import { drizzle } from 'drizzle-orm/neon-http'
 
