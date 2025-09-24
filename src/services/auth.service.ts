@@ -34,6 +34,31 @@ export const AuthService = {
     return { user: newUser, token }
   },
 
+  async signIn(email: string, password: string) {
+    if (!email || !password) {
+      logger.error('Email and password are required for sign in')
+      throw new Error('Email and password are required!')
+    }
+
+    const user = await AuthRepository.findUserByEmail(email)
+
+    if (user.length === 0) {
+      logger.error('No user found with email: %s', email)
+      throw new Error('Invalid email or password!')
+    }
+
+    const isPasswordValid = await AuthRepository.verifyPassword(password, user[0].passwordHash)
+
+    if (!isPasswordValid) {
+      logger.error('Invalid password for email: %s', email)
+      throw new Error('Invalid email or password!')
+    }
+
+    const token = jwtToken.sign({ id: user[0].id, email: user[0].email, role: user[0].role })
+
+    return { user: user[0], token }
+  },
+
   async findUserByEmail(email: string) {
     return await AuthRepository.findUserByEmail(email)
   },

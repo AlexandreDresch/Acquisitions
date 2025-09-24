@@ -5,12 +5,8 @@ const router = express.Router()
 
 router.post('/sign-up', AuthController.signUp)
 
-router.post('sign-in', (req, res) => {
-  res.status(200).send('User signed in')
-})
+router.post('sign-in', AuthController.signIn)
 
-router.post('sign-out', (req, res) => {
-  res.status(200).send('User signed out')
-})
+router.post('sign-out', AuthController.signOut)
 
 export default router
