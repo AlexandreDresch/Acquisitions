@@ -7,6 +7,7 @@ interface Config {
   databaseUrl: string
   logLevel: string
   jwt: string
+  arcjetKey: string
 }
 
 const config: Config = {
@@ -14,6 +15,7 @@ const config: Config = {
   databaseUrl: process.env.DATABASE_URL || '',
   logLevel: process.env.LOG_LEVEL || 'info',
   jwt: process.env.JWT_SECRET || 'your_jwt_secret_key',
+  arcjetKey: process.env.ARCJET_KEY || '',
 }
 
 export default config

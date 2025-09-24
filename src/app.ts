@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser'
 import logger from './config/logger.js'
 import authRoutes from './routes/auth.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js'
+import securityMiddleware from './middlewares/security.middleware.js'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app
   .use(helmet())
   .use(cors())
   .use(morgan('combined', { stream: { write: (message) => logger.info(message.trim()) } }))
+  .use(securityMiddleware)
   .use(express.json({ limit: '50mb' }))
   .use(express.urlencoded({ extended: true }))
   .use(cookieParser())
