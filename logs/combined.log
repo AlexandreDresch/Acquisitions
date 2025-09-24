@@ -1,0 +1,35 @@
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [20/Sep/2025:01:22:44 +0000] \"GET /health HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [20/Sep/2025:01:44:56 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:00:38:16 +0000] \"GET /api/health HTTP/1.1\" 404 149 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:00:38:34 +0000] \"GET /api/health HTTP/1.1\" 404 149 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:00:39:28 +0000] \"GET /health HTTP/1.1\" 200 78 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:29:15 +0000] \"POST /api/sign-up HTTP/1.1\" 404 151 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:29:18 +0000] \"POST /api/sign-up HTTP/1.1\" 404 151 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:30:15 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 500 100 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"All fields are required for sign up","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:34:49 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 500 52 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"All fields are required for sign up","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:35:09 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 500 52 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"User already exists with email: %s","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:35:30 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 500 48 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"error","message":"User already exists with email: %s","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:36:14 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 500 48 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [23/Sep/2025:02:37:30 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 375 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:16 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:17 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:18 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:19 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:19 +0000] \"GET /health HTTP/1.1\" 200 77 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"ip":"::1","level":"warn","message":"Rate limit exceeded: [object Object]","path":"/health","service":"acquisitions-api","userAgent":"HTTPie"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:20 +0000] \"GET /health HTTP/1.1\" 429 80 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"ip":"::1","level":"warn","message":"Rate limit exceeded: [object Object]","path":"/health","service":"acquisitions-api","userAgent":"HTTPie"}
+{"level":"info","message":"::1 - - [24/Sep/2025:01:42:21 +0000] \"GET /health HTTP/1.1\" 429 80 \"-\" \"HTTPie\"","service":"acquisitions-api"}

@@ -4,6 +4,7 @@ node_modules
 .env
 .env.local
 .env.*.local
+.env.development*
 
 # Ignore logger files
-logs
+logs.neon_local/

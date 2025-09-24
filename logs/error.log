@@ -1,0 +1,4 @@
+{"level":"error","message":"All fields are required for sign up","service":"acquisitions-api"}
+{"level":"error","message":"All fields are required for sign up","service":"acquisitions-api"}
+{"level":"error","message":"User already exists with email: %s","service":"acquisitions-api"}
+{"level":"error","message":"User already exists with email: %s","service":"acquisitions-api"}
