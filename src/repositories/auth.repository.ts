@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 
-import { db } from '../config/database.js'
-import { users } from '../models/user.model.js'
+import { db } from '../config/database.ts'
+import { users } from '../models/user.model.ts'
 import { eq } from 'drizzle-orm'
 
 export const AuthRepository = {

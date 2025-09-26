@@ -1,9 +1,9 @@
-import { jwtToken } from '../utils/jwt.js'
+import { jwtToken } from '../utils/jwt.ts'
 
-import { AuthRepository } from '../repositories/auth.repository.js'
-import logger from '../config/logger.js'
-import { signUpSchema } from '../schemas/auth.validation.js'
-import { formatValidationError } from '../utils/format.js'
+import { AuthRepository } from '../repositories/auth.repository.ts'
+import logger from '../config/logger.ts'
+import { signUpSchema } from '../schemas/auth.validation.ts'
+import { formatValidationError } from '../utils/format.ts'
 
 export const AuthService = {
   async signUp(username: string, email: string, password: string, role = 'user') {

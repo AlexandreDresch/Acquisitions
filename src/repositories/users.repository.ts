@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm'
-import { db } from '../config/database.js'
-import { users } from '../models/user.model.js'
-import { UserUpdate } from '../services/users.service.js'
+import { db } from '../config/database.ts'
+import { users } from '../models/user.model.ts'
+import { UserUpdate } from '../services/users.service.ts'
 
 export const UsersRepository = {
   async findAll() {

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import aj from '../config/arcjet.js'
+import aj from '../config/arcjet.ts'
 import { slidingWindow } from '@arcjet/node'
-import logger from '../config/logger.js'
+import logger from '../config/logger.ts'
 
 declare module 'express-serve-static-core' {
   interface User {

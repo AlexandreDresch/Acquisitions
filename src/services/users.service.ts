@@ -1,6 +1,6 @@
-import logger from '../config/logger.js'
-import { users } from '../models/user.model.js'
-import { UsersRepository } from '../repositories/users.repository.js'
+import logger from '../config/logger.ts'
+import { users } from '../models/user.model.ts'
+import { UsersRepository } from '../repositories/users.repository.ts'
 
 export type UserUpdate = Partial<typeof users.$inferInsert>
 

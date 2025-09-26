@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { UsersService } from '../services/users.service.js'
+import { UsersService } from '../services/users.service.ts'
 
 export const UsersController = {
   async getAllUsers(_req: Request, res: Response, next: NextFunction) {

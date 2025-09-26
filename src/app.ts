@@ -3,11 +3,11 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import logger from './config/logger.js'
-import authRoutes from './routes/auth.routes.js'
-import usersRoutes from './routes/users.routes.js'
-import errorMiddleware from './middlewares/error.middleware.js'
-import securityMiddleware from './middlewares/security.middleware.js'
+import logger from './config/logger.ts'
+import authRoutes from './routes/auth.routes.ts'
+import usersRoutes from './routes/users.routes.ts'
+import errorMiddleware from './middlewares/error.middleware.ts'
+import securityMiddleware from './middlewares/security.middleware.ts'
 
 const app = express()
 
@@ -27,6 +27,9 @@ app
   })
   .use('/api/auth', authRoutes)
   .use('/api/users', usersRoutes)
+  .use((req, res) => {
+    res.status(404).json({ message: 'Endpoint not found' })
+  })
   .use(errorMiddleware)
 
 export default app

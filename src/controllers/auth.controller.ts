@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 
-import { AuthService } from '../services/auth.service.js'
-import { cookies } from '../utils/cookies.js'
+import { AuthService } from '../services/auth.service.ts'
+import { cookies } from '../utils/cookies.ts'
 
 export const AuthController = {
   async signUp(req: Request, res: Response, next: NextFunction) {

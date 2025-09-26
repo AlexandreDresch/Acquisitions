@@ -1,5 +1,5 @@
 import arcjet, { shield, detectBot, slidingWindow } from '@arcjet/node'
-import config from './config.js'
+import config from './config.ts'
 
 const aj = arcjet({
   key: config.arcjetKey,

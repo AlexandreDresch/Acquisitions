@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
-import config from '../config/config.js'
-import logger from '../config/logger.js'
+import config from '../config/config.ts'
+import logger from '../config/logger.ts'
 
 const SECRET = config.jwt
 export const EXPIRES_IN = '1d'
