@@ -5,6 +5,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import logger from './config/logger.js'
 import authRoutes from './routes/auth.routes.js'
+import usersRoutes from './routes/users.routes.js'
 import errorMiddleware from './middlewares/error.middleware.js'
 import securityMiddleware from './middlewares/security.middleware.js'
 
@@ -25,6 +26,7 @@ app
       .json({ status: 'OK', timestamp: new Date().toISOString(), uptime: process.uptime() })
   })
   .use('/api/auth', authRoutes)
+  .use('/api/users', usersRoutes)
   .use(errorMiddleware)
 
 export default app
