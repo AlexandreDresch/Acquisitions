@@ -5,6 +5,13 @@ node_modules
 .env.local
 .env.*.local
 .env.development*
+.env.test*
 
 # Ignore logger files
 logs.neon_local/
+
+# Ignore build files
+dist
+
+# Ignore Coverage directory
+coverage
