@@ -28,7 +28,7 @@ export const UsersRepository = {
         updatedAt: users.updated_at,
       })
       .from(users)
-      .where(eq(users.id, id as unknown as number))
+      .where(eq(users.id, Number(id)))
       .limit(1)
 
     return user ?? null
@@ -38,7 +38,7 @@ export const UsersRepository = {
     return await db
       .update(users)
       .set(updates)
-      .where(eq(users.id, id as unknown as number))
+      .where(eq(users.id, Number(id)))
       .returning({
         id: users.id,
         name: users.name,
@@ -50,6 +50,6 @@ export const UsersRepository = {
   },
 
   async delete(id: string) {
-    return await db.delete(users).where(eq(users.id, id as unknown as number))
+    return await db.delete(users).where(eq(users.id, Number(id)))
   },
 }
