@@ -4,22 +4,29 @@ import { AuthRepository } from '../repositories/auth.repository.ts'
 import logger from '../config/logger.ts'
 import { signUpSchema } from '../schemas/auth.validation.ts'
 import { formatValidationError } from '../utils/format.ts'
+import { validateRequiredFields } from '../utils/utils.ts'
 
 export const AuthService = {
   async signUp(username: string, email: string, password: string, role = 'user') {
-    if (!username || !email || !password) {
-      logger.error('All fields are required for sign up')
-      throw new Error('All fields are required!')
-    }
+    const {
+      username: trimmedUsername,
+      email: trimmedEmail,
+      password: trimmedPassword,
+    } = validateRequiredFields({ username, email, password })
 
-    const existingUser = await AuthRepository.findUserByEmail(email)
+    const existingUser = await AuthRepository.findUserByEmail(trimmedEmail)
 
     if (existingUser.length > 0) {
-      logger.error('User already exists with email: %s', email)
+      logger.error('User already exists with email: %s', trimmedEmail)
       throw new Error('User already exists!')
     }
 
-    const validationResult = signUpSchema.safeParse({ name: username, email, password, role })
+    const validationResult = signUpSchema.safeParse({
+      name: trimmedUsername,
+      email: trimmedEmail,
+      password: trimmedPassword,
+      role,
+    })
     if (!validationResult.success) {
       const errorMessages = formatValidationError(validationResult.error)
 
@@ -27,7 +34,12 @@ export const AuthService = {
       throw new Error(`Validation errors: ${JSON.stringify(errorMessages)}`)
     }
 
-    const newUser = await AuthRepository.createUser(username, email, password, role)
+    const newUser = await AuthRepository.createUser(
+      trimmedUsername,
+      trimmedEmail,
+      trimmedPassword,
+      role
+    )
 
     const token = jwtToken.sign({ id: newUser.id, email: newUser.email, role: newUser.role })
 
@@ -35,22 +47,25 @@ export const AuthService = {
   },
 
   async signIn(email: string, password: string) {
-    if (!email || !password) {
-      logger.error('Email and password are required for sign in')
-      throw new Error('Email and password are required!')
-    }
+    const { email: trimmedEmail, password: trimmedPassword } = validateRequiredFields({
+      email,
+      password,
+    })
 
-    const user = await AuthRepository.findUserByEmail(email)
+    const user = await AuthRepository.findUserByEmail(trimmedEmail)
 
     if (user.length === 0) {
-      logger.error('No user found with email: %s', email)
+      logger.error('No user found with email: %s', trimmedEmail)
       throw new Error('Invalid email or password!')
     }
 
-    const isPasswordValid = await AuthRepository.verifyPassword(password, user[0].passwordHash)
+    const isPasswordValid = await AuthRepository.verifyPassword(
+      trimmedPassword,
+      user[0].passwordHash
+    )
 
     if (!isPasswordValid) {
-      logger.error('Invalid password for email: %s', email)
+      logger.error('Invalid password for email: %s', trimmedEmail)
       throw new Error('Invalid email or password!')
     }
 
