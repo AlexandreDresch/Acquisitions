@@ -7,7 +7,7 @@ export type UserUpdate = Partial<typeof users.$inferInsert>
 export const UsersService = {
   async getAllUsers() {
     try {
-      return UsersRepository.findAll()
+      return await UsersRepository.findAll()
     } catch (error) {
       logger.error('Error fetching users:', error)
       throw new Error('Error fetching users')
@@ -16,7 +16,7 @@ export const UsersService = {
 
   async getUserById(id: string) {
     try {
-      return UsersRepository.findById(id)
+      return await UsersRepository.findById(id)
     } catch (error) {
       logger.error(`Error fetching user with ID ${id}:`, error)
       throw new Error('Error fetching user')
@@ -25,7 +25,7 @@ export const UsersService = {
 
   async updateUser(id: string, updates: UserUpdate) {
     try {
-      return UsersRepository.update(id, updates)
+      return await UsersRepository.update(id, updates)
     } catch (error) {
       logger.error(`Error updating user with ID ${id}:`, error)
       throw new Error('Error updating user')
@@ -34,7 +34,7 @@ export const UsersService = {
 
   async deleteUser(id: string) {
     try {
-      return UsersRepository.delete(id)
+      return await UsersRepository.delete(id)
     } catch (error) {
       logger.error(`Error deleting user with ID ${id}:`, error)
       throw new Error('Error deleting user')
