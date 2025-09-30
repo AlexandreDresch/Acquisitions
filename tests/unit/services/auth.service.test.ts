@@ -8,14 +8,12 @@ import { formatValidationError } from '../../../src/utils/format.ts'
 
 import { jest } from '@jest/globals'
 
-// Mock dependencies
 jest.mock('../../../src/repositories/auth.repository.ts')
 jest.mock('../../../src/utils/jwt.ts')
 jest.mock('../../../src/config/logger.ts')
 jest.mock('../../../src/schemas/auth.validation.ts')
 jest.mock('../../../src/utils/format.ts')
 
-// Cast mocks to jest.Mocked types
 const mockedAuthRepository = AuthRepository as jest.Mocked<typeof AuthRepository>
 const mockedJwtToken = jwtToken as jest.Mocked<typeof jwtToken>
 const mockedLogger = logger as jest.Mocked<typeof logger>
@@ -60,11 +58,9 @@ describe('AuthService', () => {
     }
 
     it('should successfully sign up a new user', async () => {
-      // Mock repository responses
       mockedAuthRepository.findUserByEmail.mockResolvedValue([])
       mockedAuthRepository.createUser.mockResolvedValue(mockReturnedUser)
 
-      // Mock validation success
       mockedSignUpSchema.safeParse.mockReturnValue({
         success: true,
         data: signUpData,
@@ -164,7 +160,7 @@ describe('AuthService', () => {
         signUpData.username,
         signUpData.email,
         signUpData.password,
-        'user' // Default role
+        'user'
       )
     })
 
