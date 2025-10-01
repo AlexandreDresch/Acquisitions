@@ -12,7 +12,5 @@ export default {
     ],
   },
   setupFiles: ['./jest.setup.ts'],
-  transformIgnorePatterns: [
-    'node_modules/(?!(?:@arcjet|arcjet)/)',
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(?:@arcjet|arcjet)/)'],
 }
