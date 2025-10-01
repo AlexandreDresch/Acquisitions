@@ -1,6 +1,5 @@
 import dotenv from 'dotenv'
-import path from 'path'
+import { resolve } from 'path'
 
 dotenv.config()
-
-dotenv.config({ path: path.resolve(__dirname, '.env.test') })
+dotenv.config({ path: resolve(process.cwd(), '.env.test') })
