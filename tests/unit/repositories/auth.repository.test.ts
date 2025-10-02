@@ -7,14 +7,37 @@ import { AuthRepository } from '../../../src/repositories/auth.repository.ts'
 
 import { jest } from '@jest/globals'
 
-jest.mock('../../../src/config/database.ts')
-jest.mock('../../../src/models/user.model.ts')
-jest.mock('bcryptjs')
-jest.mock('drizzle-orm')
+jest.mock('../../../src/config/database.ts', () => ({
+  db: {
+    select: jest.fn(),
+    insert: jest.fn(),
+  },
+}))
 
-const mockedBcrypt = bcrypt as jest.Mocked<typeof bcrypt>
-const mockedDb = db as jest.Mocked<typeof db>
-const mockedEq = eq as jest.MockedFunction<typeof eq>
+jest.mock('../../../src/models/user.model.ts', () => ({
+  users: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    passwordHash: 'passwordHash',
+    role: 'role',
+    created_at: 'created_at',
+  },
+}))
+
+jest.mock('drizzle-orm', () => ({
+  eq: jest.fn(),
+}))
+
+jest.mock('bcryptjs', () => ({
+  genSalt: jest.fn(),
+  hash: jest.fn(),
+  compare: jest.fn(),
+}))
+
+const mockedDb = jest.mocked(db)
+const mockedEq = jest.mocked(eq)
+const mockedBcrypt = jest.mocked(bcrypt)
 
 describe('AuthRepository', () => {
   beforeEach(() => {

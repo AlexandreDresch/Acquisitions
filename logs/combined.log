@@ -118,3 +118,15 @@
 {"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:01:54:31 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"-\"","service":"acquisitions-api"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:01:54:31 +0000] \"GET /nonexistent HTTP/1.1\" 404 32 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:42:19 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:42:19 +0000] \"GET /nonexistent HTTP/1.1\" 404 32 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:50:37 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:50:37 +0000] \"GET /nonexistent HTTP/1.1\" 404 32 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:50:47 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [01/Oct/2025:02:50:47 +0000] \"GET /nonexistent HTTP/1.1\" 404 32 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"Health check endpoint called","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Oct/2025:02:06:31 +0000] \"GET /health HTTP/1.1\" 200 76 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Oct/2025:02:06:31 +0000] \"GET /nonexistent HTTP/1.1\" 404 32 \"-\" \"-\"","service":"acquisitions-api"}

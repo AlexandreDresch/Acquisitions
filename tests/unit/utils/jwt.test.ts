@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import jwt from 'jsonwebtoken'
 import { jwtToken, EXPIRES_IN } from '../../../src/utils/jwt.ts'
 import logger from '../../../src/config/logger.ts'

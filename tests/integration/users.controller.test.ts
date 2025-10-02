@@ -7,7 +7,7 @@ import { jest } from '@jest/globals'
 
 jest.mock('../../src/services/users.service.ts')
 
-const mockedUsersService = UsersService as jest.Mocked<typeof UsersService>
+const mockedUsersService = jest.mocked(UsersService)
 
 describe('UsersController Integration Tests', () => {
   let req: Partial<Request>
