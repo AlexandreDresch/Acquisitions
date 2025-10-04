@@ -3,16 +3,11 @@ import aj from '../config/arcjet.ts'
 import { slidingWindow } from '@arcjet/node'
 import logger from '../config/logger.ts'
 
-declare module 'express-serve-static-core' {
-  interface User {
-    role?: string
-  }
-  interface Request {
-    user?: User
-  }
-}
-
-const securityMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+const securityMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
     const role = req.user?.role || 'guest'
 
@@ -44,7 +39,8 @@ const securityMiddleware = async (req: Request, res: Response, next: NextFunctio
         userAgent: req.get('User-Agent'),
       })
 
-      return res.status(403).json({ success: false, message: 'Access denied: Bot detected.' })
+      res.status(403).json({ success: false, message: 'Access denied: Bot detected.' })
+      return
     }
 
     if (decision.isDenied() && decision.reason.isShield()) {
@@ -54,7 +50,8 @@ const securityMiddleware = async (req: Request, res: Response, next: NextFunctio
         userAgent: req.get('User-Agent'),
       })
 
-      return res.status(403).json({ success: false, message: 'Access denied by security shield.' })
+      res.status(403).json({ success: false, message: 'Access denied by security shield.' })
+      return
     }
 
     if (decision.isDenied()) {
@@ -64,13 +61,15 @@ const securityMiddleware = async (req: Request, res: Response, next: NextFunctio
         userAgent: req.get('User-Agent'),
       })
 
-      return res.status(429).json({ success: false, message })
+      res.status(429).json({ success: false, message })
+      return
     }
 
     next()
   } catch (error) {
     console.error('Security middleware error:', error)
-    res.status(429).json({ success: false, message: 'Too many requests. Please try again later.' })
+    next()
   }
 }
+
 export default securityMiddleware
