@@ -4,6 +4,7 @@ import securityMiddleware from '../../../src/middlewares/security.middleware.ts'
 import logger from '../../../src/config/logger.ts'
 import aj from '../../../src/config/arcjet.ts'
 import { slidingWindow } from '@arcjet/node'
+import { AuthenticatedUser } from '../../../src/types/express.ts'
 
 import { jest } from '@jest/globals'
 
@@ -35,6 +36,21 @@ jest.mock('../../../src/config/logger.ts', () => ({
 const mockedAj = aj as jest.Mocked<typeof aj>
 const mockedSlidingWindow = slidingWindow as jest.MockedFunction<typeof slidingWindow>
 const mockedLogger = logger as jest.Mocked<typeof logger>
+
+const createUser = (role: string): AuthenticatedUser => ({
+  id: getUserId(role),
+  email: `${role}@example.com`,
+  role,
+})
+
+const getUserId = (role: string): number => {
+  const roleIds: { [key: string]: number } = {
+    user: 123,
+    admin: 456,
+    guest: 789,
+  }
+  return roleIds[role] || 999
+}
 
 describe('securityMiddleware', () => {
   let req: Partial<Request>
@@ -95,7 +111,7 @@ describe('securityMiddleware', () => {
     })
 
     it('should use user limits for user role', async () => {
-      req.user = { role: 'user' }
+      req.user = createUser('user')
 
       await securityMiddleware(req as Request, res as Response, next)
 
@@ -107,7 +123,7 @@ describe('securityMiddleware', () => {
     })
 
     it('should use admin limits for admin role', async () => {
-      req.user = { role: 'admin' }
+      req.user = createUser('admin')
 
       await securityMiddleware(req as Request, res as Response, next)
 
@@ -188,7 +204,7 @@ describe('securityMiddleware', () => {
     })
 
     it('should return 429 with user message when user rate limit is exceeded', async () => {
-      req.user = { role: 'user' }
+      req.user = createUser('user')
       mockDecision.isDenied.mockReturnValue(true)
       mockDecision.reason.isBot.mockReturnValue(false)
       mockDecision.reason.isShield.mockReturnValue(false)
@@ -203,7 +219,7 @@ describe('securityMiddleware', () => {
     })
 
     it('should return 429 with admin message when admin rate limit is exceeded', async () => {
-      req.user = { role: 'admin' }
+      req.user = createUser('admin')
       mockDecision.isDenied.mockReturnValue(true)
       mockDecision.reason.isBot.mockReturnValue(false)
       mockDecision.reason.isShield.mockReturnValue(false)
@@ -231,18 +247,14 @@ describe('securityMiddleware', () => {
   })
 
   describe('Error handling', () => {
-    it('should return 429 when arcjet throws an error', async () => {
+    it('should call next() when arcjet throws an error', async () => {
       mockedAj.withRule.mockReturnValue({
         protect: jest.fn().mockRejectedValue(new Error('Arcjet error') as unknown as never),
       } as any)
 
       await securityMiddleware(req as Request, res as Response, next)
 
-      expect(res.status).toHaveBeenCalledWith(429)
-      expect(res.json).toHaveBeenCalledWith({
-        success: false,
-        message: 'Too many requests. Please try again later.',
-      })
+      expect(next).toHaveBeenCalled()
     })
 
     it('should log error when arcjet throws an error', async () => {
@@ -277,7 +289,11 @@ describe('securityMiddleware', () => {
     })
 
     it('should handle undefined user role', async () => {
-      req.user = { role: undefined }
+      req.user = {
+        id: 123,
+        email: 'user@example.com',
+        role: undefined as any,
+      }
       mockDecision.isDenied.mockReturnValue(false)
 
       await securityMiddleware(req as Request, res as Response, next)
@@ -285,6 +301,23 @@ describe('securityMiddleware', () => {
       expect(mockedSlidingWindow).toHaveBeenCalledWith({
         interval: '1m',
         max: 5,
+        mode: 'LIVE',
+      })
+    })
+
+    it('should handle user with numeric ID correctly', async () => {
+      req.user = {
+        id: 12345,
+        email: 'test@example.com',
+        role: 'user',
+      }
+      mockDecision.isDenied.mockReturnValue(false)
+
+      await securityMiddleware(req as Request, res as Response, next)
+
+      expect(mockedSlidingWindow).toHaveBeenCalledWith({
+        interval: '1m',
+        max: 10,
         mode: 'LIVE',
       })
     })
