@@ -21,7 +21,11 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
 
     next()
   } catch (error) {
-    logger.debug('Invalid token in auth middleware', { error })
+    try {
+      logger.debug('Invalid token in auth middleware', { error })
+    } catch (loggerError) {
+      console.error('Logger failed in auth middleware:', loggerError)
+    }
     next()
   }
 }
